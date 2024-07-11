@@ -1,0 +1,111 @@
+<div class="yellow-bg">
+  <div class="row justify-content-center">
+    <div class="col-md-6 mb-4">
+      <div class="input-group">
+        <input
+          type="text"
+          id="searchTitle"
+          name="searchTitle"
+          class="form-control custom-search"
+          placeholder="Search by title..."
+          [(ngModel)]="searchTitle"
+          (ngModelChange)="searchTitleSubject.next(searchTitle)"
+          style="border-radius: 20px; padding: 10px"
+        />
+      </div>
+      <div class="text-center book-logo">
+        <img
+          src="./assets/img/book-logo.png"
+          alt="Book Image"
+          class="book-image"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center align-items-center mb-3">
+  <!-- Price range dropdown -->
+  <div class="container">
+    <div class="">
+      <div class="col-md-6">
+        <select
+          id="priceRange"
+          name="priceRange"
+          class="form-control"
+          [(ngModel)]="selectedPriceRange"
+          (change)="getBooks()"
+        >
+          <option *ngFor="let price of priceRange" [value]="price.key">
+            {{ price.price }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category dropdown -->
+  <div class="container">
+    <div class="">
+      <div class="col-md-6">
+        <select
+          id="selectedCategory"
+          name="selectedCategory"
+          class="form-control"
+          [(ngModel)]="selectedCategory"
+          (change)="getBooks()"
+        >
+          <option value="">All Categories</option>
+          <option *ngFor="let category of categories" [value]="category">
+            {{ category }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <div class="row">
+    <ng-template [ngIf]="filteredBooks">
+      <div
+        class="col-md-4 mb-4"
+        *ngFor="let book of filteredBooks; let index = index"
+      >
+        <div class="card post-card">
+          <img class="card-img-top" [src]="book.file" alt="Post Image" />
+          <div class="card-body">
+            <h5 class="card-title">{{ book.title }}</h5>
+            <p class="card-text">by {{ book.author }}</p>
+            <div class="post-details">
+              <p
+                class="card-text"
+                [ngClass]="{ 'expanded-description': book.expanded }"
+              >
+                <strong>Description:</strong>
+                <span *ngIf="!book.expanded">{{
+                  book.description.substring(0, 75)
+                }}</span>
+                <span *ngIf="book.expanded">{{ book.description }}</span>
+                <span *ngIf="book.description.length > 100">
+                  <span (click)="toggleDescription(book)" class="expand-icon">
+                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                  </span>
+                </span>
+              </p>
+              <p class="card-text">
+                <strong>Price:</strong> &#8377;{{ book.price }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="(index + 1) % 5 === 0" class="clearfix"></div>
+      </div>
+    </ng-template>
+    <ng-template [ngIf]="filteredBooks.length === 0">
+      <div class="no-books-found">
+        <h3>No books found</h3>
+      </div>
+    </ng-template>
+  </div>
+</div>

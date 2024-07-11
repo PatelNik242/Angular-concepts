@@ -1,0 +1,43 @@
+.book-form {
+  max-width: 600px;
+  margin: auto;
+  margin-top: 125px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #ffdb58;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  color: #333; /* Dark gray text */
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ced4da; /* Light gray border */
+  border-radius: 5px;
+}
+
+.error-message {
+  color: #dc3545; /* Red error text */
+  margin-top: 5px;
+}
+
+.btn-primary {
+  background-color: #007bff; /* Blue button */
+  color: #fff; /* White text */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
